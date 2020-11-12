@@ -1,0 +1,121 @@
+//创建和合并分支
+//master HEAD以及分支的原理：
+					HEAD
+					   \		
+				            \ 		 
+					   master
+					     |	
+	  提交1 ——————————提交2————————————提交3
+
+//git用master指向最新提交，在用HEAD指向master·就能确定当前分，以及当前部分的提交点，每次提交，master都会向前移动一步					     
+//当我们创建新的分支的时候：
+					HEAD
+					   \		
+				           ** //断开它，连到dev		 
+					   master
+					     |	
+	  提交1 ——————————提交2————————————提交3 
+	  				     |
+	  				     dev——————HEAD	
+//创建分支无非就是添加一个指针，因此，对工作区的修改现在也就是针对dev分支了，每次提交后dev向前：
+					   master
+					     |	
+	  提交1 ——————————提交2————————————提交3————————————提交4 
+	  				     		       |
+	  				                      dev——————HEAD
+//在dev上工作结束了，就只需要把dev合并到master上就行，然后甚至可以删除dev分支，删掉后只剩master
+
+//创建新的分支：
+$ git switch -c dev//创建并切换
+$ git switch master   //切换到已有的分支
+
+$ git branch //查看分支
+$ git branch <name> //创建分支
+$ git switch <name> //切换分支
+$ git merge <name>  //合并某个分支到当前分支
+$ git branch -d <name> //删除分支
+
+/******************************************************************************************
+shenheng@shenheng-QiTianM410-N000:~/git$ git switch -c dev
+切换到一个新分支 'dev'
+shenheng@shenheng-QiTianM410-N000:~/git$ git branch
+* dev
+  master
+shenheng@shenheng-QiTianM410-N000:~/git$ git add 分支管理.txt 
+shenheng@shenheng-QiTianM410-N000:~/git$ git commit -m "learn branch"
+[dev 5fb7ddd] learn branch
+ 1 file changed, 41 insertions(+)
+ create mode 100644 "\345\210\206\346\224\257\347\256\241\347\220\206.txt"
+shenheng@shenheng-QiTianM410-N000:~/git$ git switch master
+切换到分支 'master'
+您的分支与上游分支 'origin/master' 一致。
+shenheng@shenheng-QiTianM410-N000:~/git$ git merge dev
+更新 7328c35..5fb7ddd
+error: 工作区中下列未跟踪的文件将会因为合并操作而被覆盖：
+	分支管理.txt
+请在合并前移动或删除。
+正在终止
+shenheng@shenheng-QiTianM410-N000:~/git$ git add 分支管理.txt 
+shenheng@shenheng-QiTianM410-N000:~/git$ git commit -m "learn branch"
+[master bb11ab7] learn branch
+ 1 file changed, 41 insertions(+)
+ create mode 100644 "\345\210\206\346\224\257\347\256\241\347\220\206.txt"
+shenheng@shenheng-QiTianM410-N000:~/git$ 
+shenheng@shenheng-QiTianM410-N000:~/git$ git merge dev
+Merge made by the 'recursive' strategy.
+********************************************************************************************/
+
+  
+  
+  
+//分支管理策略
+//通常，合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
+//如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。
+//下面我们实战一下--no-ff方式的git merge：
+$ git switch -c dev
+$ git add readme.txt 
+$ git commit -m "add merge"
+
+$ git switch master//现在，我们切换回master
+$ git merge --no-ff -m "merge with no-ff" dev // 准备合并dev分支，请注意--no-ff参数，表示禁用						Fast forward：
+//因为本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去。
+
+$ git log --graph --pretty=oneline --abbrev-commit
+//查看带有分支变化的log信息
+
+
+
+
+
+//分支策略
+在实际开发中，我们应该按照几个基本原则进行分支管理：
+首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+Git分支十分强大，在团队开发中应该充分应用。
+合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

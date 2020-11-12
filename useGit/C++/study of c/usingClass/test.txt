@@ -1,0 +1,1 @@
+由于ofstream对ostream的继承，我们也可以直接输入文件里 :8 Hours,35 Mins. 

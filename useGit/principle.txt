@@ -1,0 +1,54 @@
+几个概念：工作区，暂存区，版本库
+
+工作区就是，在电脑里能看到的目录，就比如git文件夹
+版本库位于.git隐藏文件中，最重要的就是stage：暂存区
+
+添加文件：git add 实际上是把文件添加到了暂存区
+接下来：git commit将暂存区中所有内容提交到当前分支
+我们在创建版本库的时候，git自动为我们创建了一个分支叫做master，git commit就是将文件更改添加到master
+
+so：将文件添加到暂存区，然后一起提交暂存区所有修改
+
+eg:
+/***********************************************************************
+shenheng@shenheng-QiTianM410-N000:~/git$ git status
+位于分支 master
+尚未暂存以备提交的变更：
+  （使用 "git add <文件>..." 更新要提交的内容）
+  （使用 "git restore <文件>..." 丢弃工作区的改动）
+	修改：     readme.txt
+
+未跟踪的文件:
+  （使用 "git add <文件>..." 以包含要提交的内容）
+	principle.txt
+
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+****************************************************************************/
+
+可以看见git很清楚的告诉我，修改了什么，添加的文件还未被添加，所以是未追踪，untracked
+然后添加 add commit
+
+/******************************************************************************
+shenheng@shenheng-QiTianM410-N000:~/git$ git add readme.txt principle.txt 
+shenheng@shenheng-QiTianM410-N000:~/git$ git commit -m "add new file"
+[master 20c54ec] add new file
+ 2 files changed, 43 insertions(+)
+ create mode 100644 principle.txt
+shenheng@shenheng-QiTianM410-N000:~/git$ git status
+位于分支 master
+无文件要提交，干净的工作区
+shenheng@shenheng-QiTianM410-N000:~/git$ 
+**********************************************************************************/
+
+现在所作的就是							HEAD\
+工作区 			       版本库			             \		 
+			        stage				     master
+readme.txt     ——————>		readme.txt
+principle.txt			principle.txt    	             分支再分支
+
+提交完毕后，没有做任何修改，工作区就是干净的，且暂存区也空了
+
+
+
+
+

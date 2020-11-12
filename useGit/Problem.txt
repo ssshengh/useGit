@@ -1,0 +1,7 @@
+系统死机几种办法
+一：进入tty终端重新登陆
+二：底层做法：alt+SysRq   r e i s u b
+
+检查dev/loop
+df -h
+清除 sudo apt-get purge snapd

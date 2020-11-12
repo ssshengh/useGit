@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/usr/include/**",
+                "/usr/include/c++/7",
+                "/usr/include/x86_64-linux-gnu/c++/7",
+                "/usr/include/c++/7/backward",
+                "/usr/lib/gcc/x86_64-linux-gnu/7/include",
+                "/usr/local/include",
+                "/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed",
+                "/usr/include/x86_64-linux-gnu",
+                "/usr/include",
+                "/home/shenheng/cv2x/ns-allinone-3.30/ns-3.30/build/**",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x64",
+            "compileCommands": "/home/shenheng/cv2x/ns-allinone-3.30/ns-3.30/build/compile_commands.json"
+        }
+    ],
+    "version": 4
+}
